@@ -1,17 +1,11 @@
 package com.example.crypto
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crypto.adapters.CoinInfoAdapter
-import com.example.crypto.databinding.ActivityCoinPriceListBinding
-import com.example.crypto.databinding.ItemCoinInfoBinding
 import com.example.crypto.pojo.CoinPriceInfo
 
 class CoinPriceListActivity : AppCompatActivity() {
