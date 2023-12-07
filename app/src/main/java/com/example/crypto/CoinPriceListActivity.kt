@@ -31,7 +31,6 @@ class CoinPriceListActivity : AppCompatActivity() {
             }
         }
 
-
         val rvCoinPriceList: RecyclerView = findViewById(R.id.rvCoinPriceList)
         rvCoinPriceList.adapter = adapter
 
