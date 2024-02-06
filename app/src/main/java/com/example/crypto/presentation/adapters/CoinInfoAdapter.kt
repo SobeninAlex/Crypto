@@ -6,10 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.crypto.R
-import com.example.crypto.data.network.ApiFactory.BASE_IMAGE_URL
 import com.example.crypto.databinding.ItemCoinInfoBinding
 import com.example.crypto.domain.entity.CoinInfoEntity
-import com.example.crypto.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter :
@@ -39,9 +37,9 @@ class CoinInfoAdapter :
                 tvSymbols.text = String.format(symbolsTemplate, coinInfoEntity.fromSymbol, coinInfoEntity.toSymbol)
                 tvPrice.text = coinInfoEntity.price
                 tvLastUpdate.text =
-                    String.format(lastUpdateTemplate, convertTimestampToTime(coinInfoEntity.lastUpdate))
+                    String.format(lastUpdateTemplate, coinInfoEntity.lastUpdate)
                 Picasso.get()
-                    .load(BASE_IMAGE_URL + coinInfoEntity.imageUrl)
+                    .load(coinInfoEntity.imageUrl)
                     .into(ivLogoCoin)
             }
 
