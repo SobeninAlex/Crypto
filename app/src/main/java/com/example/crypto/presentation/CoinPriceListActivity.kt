@@ -35,6 +35,7 @@ class CoinPriceListActivity : AppCompatActivity() {
 
     private fun initAdapter() {
         binding.rvCoinList.adapter = coinInfoAdapter
+        binding.rvCoinList.itemAnimator == null
 
         coinInfoAdapter.onCoinClickListener = {
             CoinDetailActivity.newIntent(

@@ -49,7 +49,7 @@ class CoinInfoAdapter :
         }
     }
 
-    inner class CoinInfoViewHolder(val binding: ItemCoinInfoBinding) :
+    class CoinInfoViewHolder(val binding: ItemCoinInfoBinding) :
         RecyclerView.ViewHolder(binding.root)
 
     object DiffCallback : DiffUtil.ItemCallback<CoinInfoEntity>() {
