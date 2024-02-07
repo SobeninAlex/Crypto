@@ -3,8 +3,9 @@ package com.example.crypto.presentation
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.example.crypto.R
 import com.example.crypto.databinding.ActivityCoinPriceListBinding
-import com.example.crypto.domain.entity.CoinInfoEntity
 import com.example.crypto.presentation.adapters.CoinInfoAdapter
 
 class CoinPriceListActivity : AppCompatActivity() {
@@ -27,9 +28,27 @@ class CoinPriceListActivity : AppCompatActivity() {
         viewModelObserver()
     }
 
+    private fun isOnePaneMode() =
+        binding.coinDetailContainer == null
+
+
     private fun viewModelObserver() {
         viewModel.coinInfoList.observe(this) {
             coinInfoAdapter.submitList(it)
+        }
+    }
+
+    private fun launchDetailFragment(fromSymbol: String) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.coin_detail_container, CoinDetailFragment.newInstance(fromSymbol))
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun launchDetailActivity(fromSymbol: String) {
+        CoinDetailActivity.newIntent(this, fromSymbol).also { intent ->
+            startActivity(intent)
         }
     }
 
@@ -38,12 +57,12 @@ class CoinPriceListActivity : AppCompatActivity() {
         binding.rvCoinList.itemAnimator == null
 
         coinInfoAdapter.onCoinClickListener = {
-            CoinDetailActivity.newIntent(
-                this@CoinPriceListActivity,
-                fromSymbol = it.fromSymbol
-            ).also { intent ->
-                startActivity(intent)
+            if (isOnePaneMode()) {
+                launchDetailActivity(it.fromSymbol)
+            } else {
+                launchDetailFragment(it.fromSymbol)
             }
+
         }
     }
 

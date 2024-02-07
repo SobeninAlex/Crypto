@@ -3,7 +3,10 @@ package com.example.crypto.presentation
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.ExistingWorkPolicy
+import androidx.work.WorkManager
 import com.example.crypto.data.repository.CoinRepositoryImpl
+import com.example.crypto.data.workers.RefreshDataWorker
 import com.example.crypto.domain.usecases.GetCoinInfoListUseCase
 import com.example.crypto.domain.usecases.GetCoinInfoUseCase
 import com.example.crypto.domain.usecases.LoadDataUseCase
@@ -20,16 +23,10 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
     val coinInfoList = getCoinInfoListUseCase()
 
     init {
-        loadData()
+        loadDataUseCase()
     }
 
     fun getDetailInfo(fromSymbol: String) =
         getCoinInfoUseCase(fromSymbol = fromSymbol)
-
-    private fun loadData() {
-        viewModelScope.launch {
-            loadDataUseCase()
-        }
-    }
 
 }
