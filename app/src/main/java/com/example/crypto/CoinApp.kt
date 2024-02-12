@@ -9,7 +9,7 @@ import javax.inject.Inject
 class CoinApp : Application(), Configuration.Provider {
 
     @Inject
-    lateinit var refreshDataWorkerFactory: RefreshDataWorkerFactory
+    lateinit var workerFactory: RefreshDataWorkerFactory
 
     val component by lazy {
         DaggerApplicationComponent.factory()
@@ -27,7 +27,7 @@ class CoinApp : Application(), Configuration.Provider {
      */
     override val workManagerConfiguration: Configuration
         get() = Configuration.Builder()
-            .setWorkerFactory(refreshDataWorkerFactory)
+            .setWorkerFactory(workerFactory)
             .build()
     /**
      * так же надо в манифесте определить
