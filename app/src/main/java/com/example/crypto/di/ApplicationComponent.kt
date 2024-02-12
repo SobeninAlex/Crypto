@@ -1,6 +1,7 @@
 package com.example.crypto.di
 
 import android.app.Application
+import com.example.crypto.CoinApp
 import com.example.crypto.di.annotation.ApplicationScope
 import com.example.crypto.di.module.DataModule
 import com.example.crypto.di.module.DomainModule
@@ -18,6 +19,8 @@ interface ApplicationComponent {
     fun inject(activity: CoinPriceListActivity)
 
     fun inject(fragment: CoinDetailFragment)
+
+    fun inject(coinApp: CoinApp)
 
     @Component.Factory
     interface ApplicationComponentFactory {

@@ -8,18 +8,19 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.example.crypto.data.database.AppDatabase
+import com.example.crypto.data.database.CoinInfoDao
 import com.example.crypto.data.mapper.CoinMapper
 import com.example.crypto.data.network.ApiFactory
+import com.example.crypto.data.network.ApiService
 import kotlinx.coroutines.delay
 
 class RefreshDataWorker(
     context: Context,
-    workerParams: WorkerParameters
+    workerParams: WorkerParameters,
+    private val mapper: CoinMapper,
+    private val coinInfoDao: CoinInfoDao,
+    private val apiService: ApiService
 ) : CoroutineWorker(context, workerParams) {
-
-    private val mapper = CoinMapper()
-    private val coinInfoDao = AppDatabase.getInstance(context).coinPriceInfoDao()
-    private val apiService = ApiFactory.apiService
 
     override suspend fun doWork(): Result {
         while (true) {
@@ -32,7 +33,8 @@ class RefreshDataWorker(
                     mapper.mapCoinInfoDtoToCoinInfoDbModel(it)
                 }
                 coinInfoDao.insertPriceList(listCoinInfoDbModel)
-            } catch (ex: Exception) {}
+            } catch (ex: Exception) {
+            }
             delay(10000)
         }
         //return не требуется та как жестко указываем бесконечный цикл
