@@ -1,17 +1,17 @@
-### Crypto
+# Crypto
 
 Приложение собирает информацию о курсе криптовалют с сервиса cryptocompare. 
 Так же можно просмотреть детальную информацию о каждой валюте
 
 ## branch master
-# stack
+### stack
 - RxJava
 - Retrofit
 - Room
 - Picasso
 ## branch refactoring-app
 Проведен рефакторинг приложения 
-# stack
+### stack
 - MVVM
 - Fragment
 - Kotlin Coroutines
