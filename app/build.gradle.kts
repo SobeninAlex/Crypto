@@ -80,4 +80,8 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation ("androidx.navigation:navigation-ui-ktx:2.7.6")
 
+    //Dagger
+    implementation ("com.google.dagger:dagger:2.49")
+    kapt ("com.google.dagger:dagger-compiler:2.49")
+
 }

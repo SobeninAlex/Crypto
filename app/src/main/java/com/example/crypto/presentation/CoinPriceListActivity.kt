@@ -1,16 +1,26 @@
 package com.example.crypto.presentation
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.example.crypto.CoinApp
 import com.example.crypto.R
 import com.example.crypto.databinding.ActivityCoinPriceListBinding
 import com.example.crypto.presentation.adapters.CoinInfoAdapter
+import javax.inject.Inject
 
 class CoinPriceListActivity : AppCompatActivity() {
 
-    private val viewModel by viewModels<CoinViewModel>()
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[CoinViewModel::class.java]
+    }
+
+    private val component by lazy {
+        (application as CoinApp).component
+    }
 
     private val binding by lazy {
         ActivityCoinPriceListBinding.inflate(layoutInflater)
@@ -21,6 +31,7 @@ class CoinPriceListActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
