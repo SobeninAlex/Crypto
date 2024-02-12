@@ -6,6 +6,7 @@ import com.example.crypto.di.annotation.ApplicationScope
 import com.example.crypto.di.module.DataModule
 import com.example.crypto.di.module.DomainModule
 import com.example.crypto.di.module.ViewModelModule
+import com.example.crypto.di.module.WorkerModule
 import com.example.crypto.presentation.CoinDetailFragment
 import com.example.crypto.presentation.CoinPriceListActivity
 import dagger.BindsInstance
@@ -13,7 +14,14 @@ import dagger.Component
 import dagger.Subcomponent
 
 @ApplicationScope
-@Component(modules = [DomainModule::class, ViewModelModule::class, DataModule::class])
+@Component(
+    modules = [
+        DomainModule::class,
+        ViewModelModule::class,
+        DataModule::class,
+        WorkerModule::class
+    ]
+)
 interface ApplicationComponent {
 
     fun inject(activity: CoinPriceListActivity)
